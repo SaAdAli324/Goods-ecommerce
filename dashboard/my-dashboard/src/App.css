@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@layer utilities{
+.bg-primary {
+  @apply bg-[#111111];
+}
+
+.text-primary {
+  @apply text-[#111111];
+}
+
+.border-primary {
+  @apply border-[#111111];
+}
+
+.bg-secondary {
+  @apply bg-[#FFFFFF];
+}
+
+.text-secondary {
+  @apply text-[#FFFFFF];
+}
+
+.bg-neutral {
+  @apply bg-[#f5f5f5];
+}
+
+.text-neutral {
+  @apply text-[#333333];
+}
+
+.bg-accent {
+  @apply bg-[#ff9900];
+}
+
+.text-accent {
+  @apply text-[#ff9900];
+}
+
+
+}
+@layer components{
+    .side-bar-hover:hover {
+    @apply bg-[#ffffff89] text-[#111111] rounded-2xl transition-all duration-200 ease-in-out
+}
+}
+
+
+.swiper {
+    @apply w-full h-full
+}
+
+.swiper-slide {
+    @apply text-center text-2xl flex justify-center items-center h-95
+}
+
+.swiper-slide img {
+    @apply block w-full h-full object-contain object-center
+}
+
+.swiper {
+    @apply w-full h-full ml-auto mr-auto flex justify-center items-center
+}
+
+.swiper-slide {
+    @apply bg-cover bg-center
+}
+
+.mySwiper2 {
+    @apply h-full w-full bg-cover bg-top
+}
+
+.mySwiper {
+    @apply h-14 box-border px-8 py-8
+}
+
+.mySwiper .swiper-slide {
+    @apply w-[25%] h-[100%]
+}
+
+.mySwiper .swiper-slide-thumb-active {
+    @apply opacity-100 border-2 border-amber-300
+}
+
+.swiper-slide img {
+    @apply block w-full h-full object-cover object-top
+}
+
+.active-link{
+  @apply text-[#ff9900]
+}

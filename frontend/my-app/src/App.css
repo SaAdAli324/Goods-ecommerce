@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+
+    --font-family-heading: "Playfair Display", serif;
+    --font-family-body: "Montserrat", sans-serif;
+}
+
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-family-heading);
+    }
+
+    body, p, span, a, div {
+        font-family: var(--font-family-body);
+    }
+}
+
+input {
+    @apply outline-0 border-b-2
+}
+
+.bg-primary {
+    background-color: #111111;
+}
+
+.text-primary {
+    color: #111111;
+}
+
+.border-primary {
+    border-color: #111111;
+}
+
+.bg-secondary {
+    background-color: #FFFFFF;
+}
+
+.text-secondary {
+    color: #FFFFFF;
+}
+
+.bg-neutral {
+    background-color: #f5f5f5;
+}
+
+.text-neutral {
+    color: #333;
+}
+
+.text-accent {
+    color: #ff9900;
+}
+
+.bg-accent {
+    background-color: #ff9900;
+}
+
+
+
+.side-bar-hover {
+    @apply hover:bg-[#FFFFFF] hover:text-[#111111] transition-all duration-200 ease-in-out
+}
+
+.swiper {
+    @apply w-full h-full
+}
+
+.swiper-slide {
+    @apply text-center text-2xl flex justify-center items-center
+}
+
+.swiper-slide img {
+    @apply w-full h-fit object-cover object-bottom
+}
+
+.swiper {
+    @apply w-full h-full ml-auto mr-auto flex justify-center items-center
+}
+
+.swiper-slide {
+    @apply bg-cover bg-top
+}
+
+.mySwiper2 {
+    @apply h-fit w-full
+}
+
+.mySwiper2 .swiper-slide img {
+    @apply object-cover !object-center w-full
+}
+
+.mySwiper {
+    @apply h-24 box-border px-8 py-8
+}
+
+.mySwiper .swiper-slide {
+    @apply w-[25%] h-[100%]
+}
+
+.mySwiper .swiper-slide-thumb-active {
+    @apply opacity-100 border-2 border-amber-300
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #ff9900 !important;
+    transition: color 0.2s ease-in-out;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color: #ff9900 !important;
+}
+.active-link{
+    @apply text-[#ff9900] underline
+}
