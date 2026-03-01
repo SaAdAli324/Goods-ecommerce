@@ -33,9 +33,6 @@ const handleLogOut =()=>{
                             <li className={`  flex items-center px-2  side-bar-hover gap-1`}><FaBus className='text-lg' />Orders</li>
                         </NavLink>
 
-                        <NavLink   to="/outOfStocks" className={({isActive})=> isActive? "active-link" : "" }>
-                            <li className={`  flex items-center px-2  side-bar-hover  gap-1`}><FaSwatchbook className='text-lg' />Out of stocks</li>
-                        </NavLink>
 
 
                     </ul>

@@ -7,14 +7,13 @@ import Layout from './assets/components/Layout'
 import Products from './assets/components/Products'
 import Cart from './assets/components/cart/Cart'
 import SignUp from './assets/components/Auth/SignUp'
-import UserControl from './assets/components/user/UserControl'
 import Login from './assets/components/Auth/Login'
 import Orders from './assets/components/orders/Orders'
 import { LoaderProvider } from './assets/components/context/LoaderContext'
 import Posters from './assets/components/posters/Banner'
-import TrustStrip from './assets/components/trust strip/Trust'
 import Category from './assets/components/category/Category'
 import About from './assets/components/About/About'
+import CheckOutComponent from './assets/components/cart/CheckOutComponent'
 function App() {
 
   const router = createBrowserRouter([
@@ -55,6 +54,10 @@ function App() {
       ,{
         path:"/about",
         element:<About/>
+      }
+      ,{
+        path:"/checkOut",
+        element:<CheckOutComponent/>
       }
       ]
     }

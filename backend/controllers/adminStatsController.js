@@ -27,7 +27,7 @@ export const getAdminStats = async (req, res) => {
                     potentialRevenue: [
                         {
                             $match: {
-                                status: { $in: ["Pending", "Processing", "Shipped"] }
+                                status: { $in: ["Pending", "Processing", "Shipped" ,"Delivered"] }
                             }
                         }, {
                             $group: {

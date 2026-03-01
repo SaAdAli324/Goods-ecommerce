@@ -129,9 +129,10 @@ const Orders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        { filterdOrder.map((order) => {
+                        { filterdOrder.sort((a,b)=> new Date(b.createdAt)- new Date (a.createdAt)).map((order) => {
                             return (
-                                <tr className='h-12 max-w-fit min-w-0  cursor-pointer col-span-3 hover:bg-slate-100 transition-all ease-in-out duration-150'>
+                              
+                                 <tr className='h-12 max-w-fit min-w-0  cursor-pointer col-span-3 hover:bg-slate-100 transition-all ease-in-out duration-150'>
 
                                     <td className='p-4 '>{order._id}</td>
                                     <td className='p-4 '><div>{order.user.name}</div>
@@ -157,6 +158,7 @@ const Orders = () => {
                                         </span>
                                     </td>
                                 </tr>
+                               
                             )
                         })}
                     </tbody>

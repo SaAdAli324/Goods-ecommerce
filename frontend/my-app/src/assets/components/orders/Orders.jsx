@@ -25,9 +25,10 @@ const Orders = () => {
           headers: { "Authorization": `Bearer ${token}` }
         });
         const res = await response.json();
+        console.log(res.ord);
+        
         if (res.success) {
           setUserOrders(res.order);
-        
         }
 
       } catch (error) {
@@ -60,14 +61,14 @@ const Orders = () => {
 
   if (userOrders.length === 0) {
     return (
-      <div className="w-full h-[80vh] flex flex-col justify-center items-center text-primary ">
+      <div className="w-full h-screen flex flex-col justify-center items-center text-primary ">
         <p>No order placed yet!</p>
       </div>
     );
   }
 
   return (
-    <div className=" mx-20 py-8 space-y-6">
+    <div className=" mx-20 max-sm:mx-0 max-sm:text-sm py-8 space-y-6">
 
       {userOrders.map((order) => (
         <div
@@ -83,11 +84,11 @@ const Orders = () => {
                 className={`font-semibold ${order.status === 'Pending'
                     ? 'text-accent'
                     : order.status === 'Processing'
-                      ? 'text-primary'
+                      ? 'text-blue-500'
                       : order.status === 'Shipped'
-                        ? 'text-primary'
+                        ? 'text-orange-400'
                         : order.status === 'Delivered'
-                          ? 'text-primary'
+                          ? 'text-green-500'
                           : 'text-red-500'
                   }`}
               >

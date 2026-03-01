@@ -50,7 +50,7 @@ const navigate = useNavigate()
 
   return (
     <>
-    <div className='mt- px-4 h-fit py-36  max-md:py-16 flex flex-col max-md:flex-col items-center  gap-16 '>
+    <div className=' px-4 h-fit m-0 py-36  max-md:py-16 flex flex-col max-md:flex-col items-center  gap-16 '>
       <div className=' w-fit text-center max-md:w-full'>
         <FadeInSection>
           <h2 className='text-5xl ml-8 max-md:text-center  animate-bounce '>New! </h2>

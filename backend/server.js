@@ -11,6 +11,7 @@ import userRoute from './routes/userRoute.js'
 import bannerRoutes from "./routes/bannerRoutes.js"
 import adminLoginRoute from './routes/adminLoginRoute.js'
 import adminStatsRoute from './routes/adminStatsRoute.js'
+import checkOutRoute from './routes/checkOutRoute.js'
 dotenv.config()
 
 const app = express()
@@ -37,7 +38,7 @@ app.use("/api" , userRoute)
 app.use("/api/banner" , bannerRoutes)
 app.use("/api", adminLoginRoute)
 app.use("/api/admin",adminStatsRoute)
-
+app.use("/api",checkOutRoute)
 app.listen(Port, () => {
     console.log("server running on http://localhost:5000");
 

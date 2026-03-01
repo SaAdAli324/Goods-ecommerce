@@ -18,6 +18,7 @@ import ImageSlider from '../imageSlider/ImageSlider';
 // main component to preview a single product
 import FadeInSection from '../FadeAnimation/FadeInSection';
 import ReleatedProducts from '../releatedProducts/ReleatedProducts';
+import { useLoader } from '../context/LoaderContext';
 const ProductPreview = ({ product }) => {
     const backendURL = import.meta.env.VITE_BACKEND_URL
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -25,7 +26,8 @@ const ProductPreview = ({ product }) => {
     const [previewProduct, setPreviewProduct] = useState(null)
     const [products, setProducts] = useState([])
     const [quantity, setQuantity] = useState(1)
-    const cart = localStorage.getItem("cartItem") ? JSON.parse(localStorage.getItem("cartItem")) : null
+    const {setLoading}=useLoader()
+
     
     const [searchParams] = useSearchParams()
     const product_id = searchParams.get("_id")
@@ -37,19 +39,21 @@ const ProductPreview = ({ product }) => {
     useEffect(() => {
         const productForPreview = async () => {
             try {
+                setLoading(true)
                 const res = await fetch(`${backendURL}/api/product/display?_id=${clickedProducts? clickedProducts : product_id}`)
                 const data = await res.json()
                 const products = data.selectedProduct
                setPreviewProduct(products)
                setProducts(data.relatedProducts)
-               
+               window.scrollTo(0,0)
+              setTimeout(() => setLoading(false), 1000);
 
             } catch (err) {
                 console.error("error while getting products in the product preview", err);
             }
         }
         productForPreview()
-    }, [])
+    }, [product_id])
 
     if (!previewProduct) {
         return (
@@ -71,8 +75,8 @@ const ProductPreview = ({ product }) => {
     const addTOCart = async () => {
         try {
             const token = localStorage.getItem("token")
-            const formData = new FormData()
-            formData.append("quantity", quantity)
+         console.log(typeof quantity , "this is the type of quantity");
+         
             
 
             const res = await fetch(`${backendURL}/api/cart/add/${previewProduct._id}`, {
@@ -85,7 +89,7 @@ const ProductPreview = ({ product }) => {
             })
 
             const serverResponse = await res.json()
-            console.log(serverResponse);
+           
             if (serverResponse.success) {
                 localStorage.setItem("cartItem", JSON.stringify(serverResponse.cartItem))
                 alert("item added to the cart!")
@@ -95,14 +99,8 @@ const ProductPreview = ({ product }) => {
             console.log("error while adding to cart", err);
         }
     }
-      const handleProductClick = (product) => {
-    
       
-            navigate(`/productsPreview?_id=${product._id}`)
 
-    
-    }
-console.log("this  is preview produyct",clickedProducts);
 
     return (
         <>
@@ -111,7 +109,7 @@ console.log("this  is preview produyct",clickedProducts);
 
                     <div className='flex flex-col cursor-pointer py-2'>
                         <div className='space-y-2'>
-                            <ImageSlider images={previewProduct.productImage} backendURL={backendURL} />
+                            <ImageSlider custom={"!h-[500px]"} images={previewProduct.productImage} backendURL={backendURL} />
                         </div>
                     </div>
 
@@ -119,12 +117,15 @@ console.log("this  is preview produyct",clickedProducts);
                         <h2 className='font-medium uppercase text-primary'>{previewProduct.productName}</h2>
                         <p className='text-[16px] text-neutral max'>'{previewProduct.productDescription}'</p>
                         <p className='text-accent font-bold'>RS.{previewProduct.price}</p>
+
                         <input
                             onChange={(e) => setQuantity(e.target.value || 1)}
                             type="number"
                             min="1"
+                            max={previewProduct.stock}
                             defaultValue={"1"}
                             className='border-2 border-primary rounded-md p-2 w-24 text-primary'
+                           
                         />
                         {/* {alreadyInCart ? ( */}
                             {/* <div>
@@ -157,7 +158,7 @@ console.log("this  is preview produyct",clickedProducts);
                     </div>
                 </div>
             </div>
-            <ReleatedProducts relatedProducts={products}/>
+            {products.length===0 ? "no products to show" : <ReleatedProducts relProducts={products}/>}
             
 
            

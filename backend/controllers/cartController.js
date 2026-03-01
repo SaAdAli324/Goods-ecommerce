@@ -1,53 +1,92 @@
 import User from '../models/signUpModel.js'
+import cartModel from '../models/cartModel.js';
 
+
+
+
+export const getCart = async (req, res) => {
+    try {
+        const {product_id} = req.params
+        if (product_id) {
+            const checkOutProduct = await cartModel.items.findOne({productId:product_id}).populate("items.productId")
+            res.status(200).json({message:"got the checkout item" , checkOutItem:checkOutProduct})
+            return
+        }
+        const user_id = req.user._id
+        console.log(user_id);
+
+        const userCart = await cartModel.findOne({ user_id: user_id }).populate("items.productId")
+        if (!userCart || userCart.length === 0) {
+            return res.status(404).json({ message: "no item found in the cart", success: false })
+        }
+        console.log(userCart);
+
+        res.status(200).json({ message: "got the cart item", cart: userCart })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error })
+    }
+}
 export const addToCart = async (req, res) => {
     try {
-        console.log("User req " , req.user);
-        console.log("Params req" , req.params);
-        console.log("Body req", req.body);
-        
-        const _id=req.user._id
+        const user_id = req.user._id
         const { productId } = req.params
         const { quantity } = req.body
-        console.log("");
         
 
-        const user = await User.findById(_id)
-        if (!user) {
-            return res.status(404).json({ message: "add to cart failed ", success: false })
-        }
-        const ItemIndex = user.cart.findIndex(i => i.product.toString() === productId)
+        const userCart = await cartModel.findOne({ user_id })
+      
 
-        if (ItemIndex > -1) {
-            user.cart[ItemIndex].quantity += 1 || 1
-        } else {
-            user.cart.push({ product: productId, quantity: quantity || 1 })
+        if (userCart) {
+            const itemIndex = userCart.items.findIndex(p=> p.productId.toString()===productId)
+            if (itemIndex !== -1) {
+                userCart.items[itemIndex].quantity += parseInt(quantity)
+                await userCart.save()
+                res.status(200).json({ message: "item added", cart: userCart  ,success:true})
+                return
+            }
+            userCart.items.push({ quantity, productId })
+            await userCart.save()
+            res.status(200).json({ message: "item added", cart: userCart , success:true })
+            return
         }
-
-        await user.save()
-        console.log(user.cart)
-        res.status(200).json({ cartItem: user.cart, message: "Item added to the cart", success: true })
+        const newCart = await cartModel.create({user_id:user_id , items:[{quantity:quantity , productId:productId}]})
+        await newCart.save()
+        
+        res.status(200).json({ cartItem: newCart, message: "Item added to the cart", success: true })
 
     } catch (err) {
         if (err.name === "ValidationError") {
             const errors = Object.values(err.errors).map(e => e.message);
+            console.log(errors);
+
             return res.status(400).json({ errors });
         }
         res.status(500).json({ message: "Server error" });
+           console.error(err);
     }
+ 
+
 }
 
 export const removeFromCart = async (req, res) => {
     try {
         const { productId } = req.params
-        const _id = req.user._id
-        console.log(_id)
-        
-       const user= await User.findByIdAndUpdate(_id, { $pull: { cart: { product: productId } } }, { new: true })
-        res.json({ message:"Item removed from the cart", success:true ,cart:user.cart })
+        const user_id = req.user._id
+
+
+        const user = await cartModel.findOneAndUpdate(
+            {user_id:user_id},
+            {$pull:{items:{_id:productId}}},
+            {new:true})
+       
+       await user.save()
+       console.log(user);
+       
+        res.json({ message: "Item removed from the cart", success: true, cart: user })
 
     } catch (err) {
-        res.json({ message:"could'nt remove the item try later", success:false})
+        res.json({ message: "could'nt remove the item try later", success: false })
         console.log("error while removing cart item", err);
 
     }

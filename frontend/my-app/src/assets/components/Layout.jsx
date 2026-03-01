@@ -11,10 +11,9 @@ const Layout = () => {
     return (
 
 
-        <div>
+        <div className=''>
             <Navbar />
             {loading && <LoadingOverlay />}
-
             <Outlet />
             <Footer/>
         </div>

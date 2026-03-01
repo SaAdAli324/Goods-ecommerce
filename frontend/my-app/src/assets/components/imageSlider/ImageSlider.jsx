@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
-export default function ImageSlider({ images = [], backendURL }) {
+export default function ImageSlider({ images = [], backendURL ,custom }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -22,7 +22,7 @@ export default function ImageSlider({ images = [], backendURL }) {
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2"
+        className={`mySwiper2 !${custom}`}
       >
         {images.map((img) => (
           <SwiperSlide key={img.filename} onClick={(e) => e.stopPropagation()}>

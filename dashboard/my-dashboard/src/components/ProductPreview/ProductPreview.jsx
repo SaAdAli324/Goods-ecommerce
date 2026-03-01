@@ -137,12 +137,12 @@ const ProductPreview = ({ product }) => {
     }
 
     return (
-        <div className='pl-32 space-y-4  '>
+        <div className='pl-32 max-md:flex max-md:pl-0 max-md:justify-center max-md:items-center space-y-4  '>
 
-            <div className=' container mx-auto pt-20 grid grid-cols-2 max-md:grid-cols-1  '>
+            <div className=' container mx-auto pt-20  grid grid-cols-2 max-md:grid-cols-1  '>
 
-                <div className='shadow-2xl w-fit !bg-transparent flex flex-col justify-center h-fit cursor-pointer py-2 '>
-                    <div className='space-y-2 min-h-0 max-h-fit w-2xl  ' >
+                <div className='shadow-2xl max-w-full  !bg-transparent  flex flex-col justify-center h-fit cursor-pointer py-2 '>
+                    <div className='space-y-2 min-h-0 mx-auto max-h-fit max-w-full ' >
                         <ImageSlider  images={selectedProduct.productImage} backendURL={backendURL} customize={"h-96 object-cover object-top"} />
 
                     </div>
@@ -168,9 +168,9 @@ const ProductPreview = ({ product }) => {
                     </div>)
                         :
 
-                        (<div className='flex flex-col  '>
+                        (<div className='flex flex-col max-w-full  '>
 
-                            <form disabke action="submit" onSubmit={handleSubmit((data) => confirmation(data))} className='py-8 px-4 space-y-1 shadow-xl rounded-2xl min-w-0 max-w-xl max-sm:w-full flex flex-col'>
+                            <form disabke action="submit" onSubmit={handleSubmit((data) => confirmation(data))} className='py-8 px-4 space-y-1 shadow-xl rounded-2xl min-w-0 max-w-full max-sm:w-full flex flex-col'>
                                 <h2 className='font-medium text-3xl text-center text-primary'>Update Product</h2>
 
                                 <span className='text-red-500 cursor-pointer ml-auto text-3xl' onClick={() => setIsEditing(false)}>x</span>

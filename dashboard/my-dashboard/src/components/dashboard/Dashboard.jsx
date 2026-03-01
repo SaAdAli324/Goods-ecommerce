@@ -33,9 +33,6 @@ const AdminDashboard = () => {
 
     fetchData();
   }, []);
-
-  // Prepare data for Pie Chart (Order Distribution)
-  // Assuming Total = Pending + Delivered (simplified for visualization)
   const pieData = [
     { name: 'Pending', value: stats.pendingOrders },
     { name: 'Delivered', value: stats.totalOrders - stats.pendingOrders },

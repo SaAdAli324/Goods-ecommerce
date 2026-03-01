@@ -89,7 +89,7 @@ const category = searchParams.get('category'); // "women"
     }
     return (
         <>
-        <div className='mx-auto  bg-white px- max-sm:px-2 max-md:px-10  space-y-4 py-4 mt-5'>
+        <div className='mx-auto  bg-white px- max-sm:px-2 max-md:px-10  space-y-4 py-4 mt-'>
             <h1 className=' px-4 font-medium text-primary text-5xl uppercase max-sm:text-3xl '>{related? related :"NEW AND TRENDING"}
                 
                 {categoryFilter?  " for" + " "+ categoryFilter +"!" : ""} </h1>
@@ -127,11 +127,12 @@ const category = searchParams.get('category'); // "women"
                             className='flex  flex-col cursor-pointer pb-4   overflow-hidden  hover:shadow-lg transition-all duration-150'
                         >
                             <FadeInSection>
-                                <div className='h-fit space-y-2'>
+                                <div className='h-fit space-y-2' >
                                     <img
                                         className='w-full h-[600px] object-cover object-top rounded-t'
                                         src={`${backendURL}/${m.productImage[0].path.replace(/\\/g, "/")}`}
                                         alt="no image available"
+                                        loading='lazy'
                                     />
                                 </div>
                             </FadeInSection>

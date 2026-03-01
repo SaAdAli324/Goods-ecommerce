@@ -1,20 +1,4 @@
 import mongoose from "mongoose";
-import { type } from "os";
-import { ref } from "process";
-
-const cartSchema = new mongoose.Schema({
-    product:{
-        type:mongoose.Schema.Types.ObjectId , 
-        ref:"products",
-        required:true
-    },
-    quantity:{
-        type:Number,
-        default:1,
-        min:1 
-    }
-},{timestamps:true})
-
 
 const signUpSchema = new mongoose.Schema({
     name: {
@@ -58,7 +42,6 @@ const signUpSchema = new mongoose.Schema({
         path:{type: String },
    
    }],
-    cart:[cartSchema]
 }, { timestamps: true })
 
 export default mongoose.model("User", signUpSchema)

@@ -10,7 +10,7 @@ import { FaCartPlus, FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 const Navbar = () => {
 
   const user = localStorage.getItem('user') ? (JSON.parse(localStorage.getItem("user"))) : null
-  console.log(user);
+
 
   const [displayUserControl, setDisplayUserControl] = useState(false)
   const navigate = useNavigate()
@@ -89,7 +89,7 @@ const Navbar = () => {
           <div className='pr-4 flex justify-between max-xl:flex-col items-center gap-[10%]'>
 
             {/* Logo */}
-            <div className="w-[380px] justify-center overflow-hidden flex  items-center  h-25 mt-0 ">
+            <div className="w-[390px]  justify-center overflow-hidden flex  items-center  h-25 mt-0 ">
               <Link className='' to={"/"}>
              <h2 className='text-5xl' >GoOds</h2>
               </Link>
@@ -114,7 +114,7 @@ const Navbar = () => {
 
               {/* Search */}
               <input
-                className='border-b px-2  font-light mx-auto text-2xl h-full outline-none border-secondary placeholder-gray-400'
+                className='!border-b-[1px] px-2 py-1  !font-light mx-auto text-2xl h-full outline-none border-secondary placeholder-gray-400'
                 type="search"
                 name="search"
                 id="search"
