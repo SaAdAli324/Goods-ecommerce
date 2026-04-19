@@ -1,9 +1,9 @@
-# Ignore all node_modules in any subfolder
+# Ignore node_modules in any subfolder
 **/node_modules/
 
-# Ignore all environment files in any subfolder
+# Ignore ALL .env files anywhere in the project
 **/.env
-
-# Ignore build folders
-**/dist/
-**/build/
+.env
+backend/.env
+frontend/.env
+dashboard/.env
